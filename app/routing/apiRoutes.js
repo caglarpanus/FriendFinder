@@ -1,7 +1,5 @@
 
 var friends = require("../data/friends.js");
-
-var bodyParser = require("body-parser");
 var path = require("path");
 
 
