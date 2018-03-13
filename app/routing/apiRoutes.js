@@ -12,9 +12,9 @@ module.exports = function(app){
     app.post("/api/friends", function(req,res){
 
         var newUser = {
-            name:req.body.name,
-            photo:req.body.photo,
-            scores:JSON.parse(req.body.scores)
+            name: req.body.name,
+            photo: req.body.photo,
+            scores: JSON.parse(req.body.scores)
         }
 
         var diffArray =[];
@@ -23,8 +23,8 @@ module.exports = function(app){
             var difference = 0;
             for(var i=0; item.scores.length; i++){
                 difference += Math.abs(item.scores[i] - newUser.scores[i]);
-                diffArray.push({"difference": difference, "index":index});
             }
+            diffArray.push({"difference": difference, "index":index});
         });
         diffArray.sort(function(a,b){
             return a.difference - b.difference;

@@ -11,6 +11,6 @@
 .bg-light{
     background-color: #d4c0c0!important;
 }
-body {
-    background-color: yellow;
+.navbar-brand img {
+	display: inline-block;
 }
