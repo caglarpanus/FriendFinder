@@ -33,7 +33,7 @@
             <strong>Question 1</strong>
         </h3>
         <h4>You have big mood swings.</h4>
-        <select class="form-control" id="q0">
+        <select class="form-control chosen-select" id="q0">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -46,7 +46,7 @@
             <strong>Question 2</strong>
         </h3>
         <h4>Make plans and stick to them.</h4>
-        <select class="form-control" id="q1">
+        <select class="form-control chosen-select" id="q1">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -59,7 +59,7 @@
             <strong>Question 3</strong>
         </h3>
         <h4>Feel comfortable with myself.</h4>
-        <select class="form-control" id="q2">
+        <select class="form-control chosen-select" id="q2">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -72,7 +72,7 @@
             <strong>Question 4</strong>
         </h3>
         <h4>Get back at others.</h4>
-        <select class="form-control" id="q3">
+        <select class="form-control chosen-select" id="q3">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -85,7 +85,7 @@
             <strong>Question 5</strong>
         </h3>
         <h4>Have a good word for everyone.</h4>
-        <select class="form-control" id="q4">
+        <select class="form-control chosen-select" id="q4">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -98,7 +98,7 @@
             <strong>Question 6</strong>
         </h3>
         <h4>Lead more than I follow.</h4>
-        <select class="form-control" id="q5">
+        <select class="form-control chosen-select" id="q5">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -111,7 +111,7 @@
             <strong>Question 7</strong>
         </h3>
         <h4>Thrive when the going gets tough.</h4>
-        <select class="form-control" id="q6">
+        <select class="form-control chosen-select" id="q6">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -124,7 +124,7 @@
             <strong>Question 8</strong>
         </h3>
         <h4>Don't like to draw attention to myself.</h4>
-        <select class="form-control" id="q7">
+        <select class="form-control chosen-select" id="q7">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -137,7 +137,7 @@
             <strong>Question 9</strong>
         </h3>
         <h4>Avoid philosophical discussions.</h4>
-        <select class="form-control" id="q8">
+        <select class="form-control chosen-select" id="q8">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -150,7 +150,7 @@
             <strong>Question 10</strong>
         </h3>
         <h4>Make silly mistakes.</h4>
-        <select class="form-control" id="q9">
+        <select class="form-control chosen-select" id="q9">
             <option value=""></option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -192,7 +192,7 @@
                 </div>
                 <div class="modal-body">
                     <h2 id="match-name"></h2>
-                    <img id="match-img" alt="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpRlN16IYgpKdC-MfVUSDkXHz2H0wSs8z-Tp7-jckbMJxQlBN3">
+                    <img id="match-img" alt="">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -201,7 +201,47 @@
 
         </div>
     </div>
+<script>
+    //Capturing the form inputs.
+    $("#submit").click(function(){
+        function validateForm(){
+            var isValid = true;
+            if(".form-control").each(function(){
+                if($(this).val() === "");
+                isValid = false;
+            });
+
+            $(".chosen-select").each(function(){
+                if($(this).val() === "");
+                isValid = false;
+            });
+            return isValid;
+        }
+        
+        if(validateForm() === true){
+
+            var scores = JSON.stringify([$("#q0").val(), $("#q1").val(), $("#q2").val(),$("#q3").val(),$("#q4").val(),$("#q5").val(),$("#q6").val(),$("#q7").val(),$("#q8").val(),$("#q9").val()]);
+            
+            var userData = {
+                name:$("#name").val(),
+                photo:$("#photo").val(),
+                scores:scores
+            }
+            var currentURL = window.location.origin;
+
+            $.post(currentURL + "/api/friends", userData, function(data){
+                $("#match-name").text(data.name);
+                $("#match-img").attr("src", data.photo);
+                $("#results-modal").modal("toggle");
+            });
+        }
+        $("#name").val("");
+        $("#photo").val("");
+        $("#q0").val(""), $("#q1").val(""), $("#q2").val(""),$("#q3").val(""),$("#q4").val(""),$("#q5").val(""),$("#q6").val(""),$("#q7").val(""),$("#q8").val(""),$("#q9").val("");
+    });
+
+
+</script>
 
 </body>
-
 </html>
