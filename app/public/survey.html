@@ -191,7 +191,7 @@
                 </div>
                 <div class="modal-body">
                     <h2 id="match-name"></h2>
-                    <img id="match-img" src="" alt="">
+                    <img id="match-img" src="">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -199,14 +199,15 @@
             </div>
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script type="text/javascript">
     //Capturing the form inputs.
     
-     $("#submit").on("click", function() {
+     $("#submit").on("click", function(event) {
+
+         event.preventDefault();
 
         function validationForm() {
             var isValid = true;
@@ -240,21 +241,22 @@
                 console.log(data);
                 $("#match-name").text(data.name);
                 $('#match-img').attr("src", data.photo);
-                $("#results-modal").modal('toggle');
+                $("#results-modal").modal('show');
 
             });
         }
 
-        $("#name").val("");
-        $("#photo").val("");
-        $("#q1").val(""), $("#q2").val(""), $("#q3").val(""), $("#q4").val(""), $("#q5").val(""),
-        $("#q6").val(""), $("#q7").val(""), $("#q8").val(""), $("#q9").val(""), $("#q10").val("");
+            $("#name").val("");
+            $("#photo").val("");
+            $("#q1").val(""), $("#q2").val(""), $("#q3").val(""), $("#q4").val(""), $("#q5").val(""),
+            $("#q6").val(""), $("#q7").val(""), $("#q8").val(""), $("#q9").val(""), $("#q10").val("");
 
-        return false;
+            return false;
         });
 
 
     </script>
  </body>
+ 
 </html>
 
